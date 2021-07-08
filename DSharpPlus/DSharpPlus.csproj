@@ -30,7 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\" />
+    <Folder Include="Gateway\" />
+    <Folder Include="Cache\" />
+    <Folder Include="Rest\" />
   </ItemGroup>
 
 </Project>
