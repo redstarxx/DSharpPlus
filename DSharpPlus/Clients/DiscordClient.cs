@@ -48,9 +48,11 @@ namespace DSharpPlus
     /// </summary>
     public sealed partial class DiscordClient
     {
+        private readonly ShardManager _shardManager;
+        private readonly RestManager _restManager;
+
         #region Internal Fields/Properties
 
-        internal bool _isShard = false;
         internal RingBuffer<DiscordMessage> MessageCache { get; }
 
         private List<BaseExtension> _extensions = new();
@@ -303,12 +305,9 @@ namespace DSharpPlus
                 };
             }
 
-            if (!this._isShard)
-            {
-                if (this.Configuration.TokenType != TokenType.Bot)
-                    this.Logger.LogWarning(LoggerEvents.Misc, "You are logging in with a token that is not a bot token. This is not officially supported by Discord, and can result in your account being terminated if you aren't careful.");
-                this.Logger.LogInformation(LoggerEvents.Startup, "DSharpPlus, version {0}", this.VersionString);
-            }
+            if (this.Configuration.TokenType != TokenType.Bot)
+                this.Logger.LogWarning(LoggerEvents.Misc, "You are logging in with a token that is not a bot token. This is not officially supported by Discord, and can result in your account being terminated if you aren't careful.");
+            this.Logger.LogInformation(LoggerEvents.Startup, "DSharpPlus, version {0}", this.VersionString);
 
             while (i-- > 0 || this.Configuration.ReconnectIndefinitely)
             {

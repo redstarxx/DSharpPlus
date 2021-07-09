@@ -151,7 +151,7 @@ namespace DSharpPlus.Interactivity.Extensions
             var interactivity = client.GetInteractivity();
 
             return interactivity == null
-                ? throw new InvalidOperationException($"Interactivity is not enabled for this {(client._isShard ? "shard" : "client")}.")
+                ? throw new InvalidOperationException($"Interactivity is not enabled for this client.")
                 : interactivity;
         }
     }
