@@ -35,9 +35,10 @@ namespace DSharpPlus
     {
         private readonly ICacheManager _cacheManager;
 
-        private readonly AsyncEvent<DiscordClient, ReadyEventArgs> _ready;
+        //todo: switch to methods instead?
+        private readonly AsyncEvent<Shard, ReadyEventArgs> _ready;
 
-        internal event AsyncEventHandler<DiscordClient, ReadyEventArgs> Ready
+        internal event AsyncEventHandler<Shard, ReadyEventArgs> Ready
         {
             add => this._ready.Register(value);
             remove => this._ready.Unregister(value);
