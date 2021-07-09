@@ -25,11 +25,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DSharpPlus
 {
     internal interface IRatelimiter
     {
-        public ConcurrentDictionary<object, IBucket> Buckets { get; }
+        IRequestClient Client { get; }
+
+        ConcurrentDictionary<object, IBucket> Buckets { get; }
+
+        Task<T> QueueAsync<T>(IRequest request);
     }
 }

@@ -23,44 +23,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using DSharpPlus.Entities;
 
 namespace DSharpPlus
 {
-    public sealed class DiscordClient
+    internal struct RestRequest : IRequest, IDisposable
     {
-        private readonly ShardManager _shardManager;
-        private readonly RestManager _restManager;
-        private readonly ICacheManager _cacheManager;
+        public string Method { get; }
 
-        public IReadOnlyDictionary<ulong, DiscordGuild> Guilds
-            => _cacheManager.GuildCache;
+        public Uri Route { get; }
 
-        public DiscordClient(DiscordConfiguration configuration)
+        public Stream Data { get; }
+
+        public RestRequest(string method, Uri route, Stream data = null)
         {
-            _shardManager = new ShardManager(configuration);
-            _restManager = new RestManager(configuration);
-            _cacheManager = configuration.CacheManager ?? CacheManager.CreateDefault();
+            this.Method = method;
+            this.Route = route;
+            this.Data = data;
         }
 
-        public Task ConnectAsync()
-            => _shardManager.CreateAndInitializeShardsAsync();
-
-        public Task<DiscordGuild> GetRestGuildAsync(ulong id)
-            => _restManager.GetGuildAsync();
-            
-    }
-
-    public enum ClientState
-    {
-        Initialized,
-        Connecting,
-        Connected,
-        Identifying,
-        Ready,
-        Disconnected,
-        Reconnecting
+        public void Dispose()
+            => this.Data?.Dispose();
     }
 }

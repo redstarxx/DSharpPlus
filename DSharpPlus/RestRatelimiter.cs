@@ -22,13 +22,31 @@
 // SOFTWARE.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DSharpPlus
 {
-    public class RestRatelimiter : IRatelimiter
+    internal class RestRatelimiter : IRatelimiter
     {
+        public IRequestClient Client { get; }
 
+        public ConcurrentDictionary<object, IBucket> Buckets { get; }
+
+        public RestRatelimiter(DiscordConfiguration configuration)
+        {
+            this.Client = new RestClient(configuration);
+        }
+
+        public Task<T> QueueAsync<T>(IRequest request)
+        {
+            var restRequest = (RestRequest)request;
+
+            //ratelimit handling here...
+
+
+        }
     }
 }

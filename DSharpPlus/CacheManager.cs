@@ -22,22 +22,35 @@
 // SOFTWARE.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using DSharpPlus.Entities;
 
 namespace DSharpPlus
 {
     public class CacheManager : ICacheManager
     {
+        private readonly bool _nullCache;
+
+        public ConcurrentDictionary<ulong, DiscordGuild> GuildCache { get; }
+
         public static ICacheManager CreateDefault()
             => new CacheManager();
 
-        public static ICacheManager CreateEmpty()
+        public static ICacheManager CreateNull()
             => new CacheManager(true);
 
-        internal CacheManager(bool empty = false)
+        internal CacheManager(bool nullCache = false)
         {
-
+            if (nullCache)
+            {
+                this.GuildCache = new ConcurrentDictionary<ulong, DiscordGuild>(0, 0);
+            }
+            else
+            {
+                this.GuildCache = new ConcurrentDictionary<ulong, DiscordGuild>();
+            }
         }
     }
 }

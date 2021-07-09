@@ -23,12 +23,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.Concurrent;
+using DSharpPlus.Entities;
 
 namespace DSharpPlus
 {
     public interface ICacheManager
     {
-
+        ConcurrentDictionary<ulong, DiscordGuild> GuildCache { get; }
     }
 }

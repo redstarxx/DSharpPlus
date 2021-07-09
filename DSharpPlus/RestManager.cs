@@ -23,15 +23,59 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading.Tasks;
+using DSharpPlus.Entities;
+using DSharpPlus.Net;
 
 namespace DSharpPlus
 {
-    public class RestManager
+    internal class RestManager : IManager
     {
+        public DiscordConfiguration Configuration { get; }
+        public IRatelimiter Ratelimiter { get; }
+
         public RestManager(DiscordConfiguration configuration)
         {
+            this.Configuration = configuration;
+            this.Ratelimiter = new RestRatelimiter(configuration);
+        }
 
+        public Task<DiscordGuild> GetGuildAsync(ulong guildId, bool? with_counts)
+        {
+            var route = this.PrepareRoute($"{Endpoints.GUILDS}/{guildId}", with_counts);
+            var request = new RestRequest("GET", route);
+            return this.Ratelimiter.QueueAsync<DiscordGuild>(request);            
+        }
+
+        private Uri PrepareRoute(string route, params object[] @params)
+        {
+            var url = Endpoints.BASE_URI + route;
+
+            if (@params != null)
+            {
+                var urlParams = this.BuildQueryString(@params);
+                url += urlParams;
+            }
+
+            return new Uri(url);
+        }
+
+        private string BuildQueryString(object[] @params, bool post = false)
+        {
+            if (@params == null || @params.Length == 0)
+                return string.Empty;
+
+            var vals_collection = @params.Select(obj =>
+            {
+                var xkvp = obj.ToString();
+                return $"{WebUtility.UrlEncode(xkvp)}={WebUtility.UrlEncode(xkvp)}";
+            });
+
+            var vals = string.Join("&", vals_collection);
+            return !post ? $"?{vals}" : vals;
         }
     }
 }
