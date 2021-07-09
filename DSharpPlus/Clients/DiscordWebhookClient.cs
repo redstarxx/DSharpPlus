@@ -152,7 +152,7 @@ namespace DSharpPlus
         /// <param name="id">ID of the webhook to register.</param>
         /// <param name="client">Discord client to which the webhook will belong.</param>
         /// <returns>The registered webhook.</returns>
-        public async Task<DiscordWebhook> AddWebhookAsync(ulong id, BaseDiscordClient client)
+        public async Task<DiscordWebhook> AddWebhookAsync(ulong id, DiscordClient client)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));

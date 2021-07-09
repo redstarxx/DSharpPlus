@@ -28,9 +28,9 @@ namespace DSharpPlus
 {
     internal class ShardedLoggerFactory : ILoggerFactory
     {
-        private ILogger<BaseDiscordClient> Logger { get; }
+        private ILogger<DiscordClient> Logger { get; }
 
-        public ShardedLoggerFactory(ILogger<BaseDiscordClient> instance)
+        public ShardedLoggerFactory(ILogger<DiscordClient> instance)
         {
             this.Logger = instance;
         }
@@ -39,8 +39,8 @@ namespace DSharpPlus
 
         public ILogger CreateLogger(string categoryName)
         {
-            return categoryName != typeof(BaseDiscordClient).FullName
-                ? throw new ArgumentException($"This factory can only provide instances of loggers for {typeof(BaseDiscordClient).FullName}.", nameof(categoryName))
+            return categoryName != typeof(DiscordClient).FullName
+                ? throw new ArgumentException($"This factory can only provide instances of loggers for {typeof(DiscordClient).FullName}.", nameof(categoryName))
                 : this.Logger;
         }
 

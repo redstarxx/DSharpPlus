@@ -32,7 +32,7 @@ namespace DSharpPlus.Entities
     /// </summary>
     public class DiscordInvite
     {
-        internal BaseDiscordClient Discord { get; set; }
+        internal DiscordClient Discord { get; set; }
 
         /// <summary>
         /// Gets the invite's code.

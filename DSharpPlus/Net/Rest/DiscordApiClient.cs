@@ -42,10 +42,10 @@ namespace DSharpPlus.Net
     {
         private const string REASON_HEADER_NAME = "X-Audit-Log-Reason";
 
-        internal BaseDiscordClient Discord { get; }
+        internal DiscordClient Discord { get; }
         internal RestClient Rest { get; }
 
-        internal DiscordApiClient(BaseDiscordClient client)
+        internal DiscordApiClient(DiscordClient client)
         {
             this.Discord = client;
             this.Rest = new RestClient(client);
@@ -123,7 +123,7 @@ namespace DSharpPlus.Net
                 xr.Emoji.Discord = this.Discord;
         }
 
-        private Task<RestResponse> DoRequestAsync(BaseDiscordClient client, RateLimitBucket bucket, Uri url, RestRequestMethod method, string route, IReadOnlyDictionary<string, string> headers = null, string payload = null, double? ratelimitWaitOverride = null)
+        private Task<RestResponse> DoRequestAsync(DiscordClient client, RateLimitBucket bucket, Uri url, RestRequestMethod method, string route, IReadOnlyDictionary<string, string> headers = null, string payload = null, double? ratelimitWaitOverride = null)
         {
             var req = new RestRequest(client, bucket, url, method, route, headers, payload, ratelimitWaitOverride);
 
@@ -135,7 +135,7 @@ namespace DSharpPlus.Net
             return req.WaitForCompletionAsync();
         }
 
-        private Task<RestResponse> DoMultipartAsync(BaseDiscordClient client, RateLimitBucket bucket, Uri url, RestRequestMethod method, string route, IReadOnlyDictionary<string, string> headers = null, IReadOnlyDictionary<string, string> values = null,
+        private Task<RestResponse> DoMultipartAsync(DiscordClient client, RateLimitBucket bucket, Uri url, RestRequestMethod method, string route, IReadOnlyDictionary<string, string> headers = null, IReadOnlyDictionary<string, string> values = null,
             IReadOnlyCollection<DiscordMessageFile> files = null, double? ratelimitWaitOverride = null)
         {
             var req = new MultipartWebRequest(client, bucket, url, method, route, headers, values, files, ratelimitWaitOverride);

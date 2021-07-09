@@ -26,14 +26,14 @@ using Microsoft.Extensions.Logging;
 
 namespace DSharpPlus
 {
-    public class DefaultLogger : ILogger<BaseDiscordClient>
+    public class DefaultLogger : ILogger<DiscordClient>
     {
         private static readonly object _lock = new();
 
         private LogLevel MinimumLevel { get; }
         private string TimestampFormat { get; }
 
-        internal DefaultLogger(BaseDiscordClient client)
+        internal DefaultLogger(DiscordClient client)
             : this(client.Configuration.MinimumLogLevel, client.Configuration.LogTimestampFormat)
         { }
 

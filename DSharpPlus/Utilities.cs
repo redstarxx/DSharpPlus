@@ -92,7 +92,7 @@ namespace DSharpPlus
         internal static QueryUriBuilder GetApiUriBuilderFor(string path)
             => new($"{GetApiBaseUri()}{path}");
 
-        internal static string GetFormattedToken(BaseDiscordClient client) => GetFormattedToken(client.Configuration);
+        internal static string GetFormattedToken(DiscordClient client) => GetFormattedToken(client.Configuration);
 
         internal static string GetFormattedToken(DiscordConfiguration config)
         {

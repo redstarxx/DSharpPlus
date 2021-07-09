@@ -204,10 +204,10 @@ namespace DSharpPlus.Entities
         /// <summary>
         /// Creates an emoji object from a unicode entity.
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="unicodeEntity">Unicode entity to create the object from.</param>
         /// <returns>Create <see cref="DiscordEmoji"/> object.</returns>
-        public static DiscordEmoji FromUnicode(BaseDiscordClient client, string unicodeEntity)
+        public static DiscordEmoji FromUnicode(DiscordClient client, string unicodeEntity)
         {
             return !IsValidUnicode(unicodeEntity)
                 ? throw new ArgumentException("Specified unicode entity is not a valid unicode emoji.", nameof(unicodeEntity))
@@ -225,11 +225,11 @@ namespace DSharpPlus.Entities
         /// <summary>
         /// Attempts to create an emoji object from a unicode entity.
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="unicodeEntity">Unicode entity to create the object from.</param>
         /// <param name="emoji">Resulting <see cref="DiscordEmoji"/> object.</param>
         /// <returns>Whether the operation was successful.</returns>
-        public static bool TryFromUnicode(BaseDiscordClient client, string unicodeEntity, out DiscordEmoji emoji)
+        public static bool TryFromUnicode(DiscordClient client, string unicodeEntity, out DiscordEmoji emoji)
         {
             // this is a round-trip operation because of FE0F inconsistencies.
             // through this, the inconsistency is normalized.
@@ -257,10 +257,10 @@ namespace DSharpPlus.Entities
         /// <summary>
         /// Creates an emoji object from a guild emote.
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="id">Id of the emote.</param>
         /// <returns>Create <see cref="DiscordEmoji"/> object.</returns>
-        public static DiscordEmoji FromGuildEmote(BaseDiscordClient client, ulong id)
+        public static DiscordEmoji FromGuildEmote(DiscordClient client, ulong id)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client), "Client cannot be null.");
@@ -277,11 +277,11 @@ namespace DSharpPlus.Entities
         /// <summary>
         /// Attempts to create an emoji object from a guild emote.
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="id">Id of the emote.</param>
         /// <param name="emoji">Resulting <see cref="DiscordEmoji"/> object.</param>
         /// <returns>Whether the operation was successful.</returns>
-        public static bool TryFromGuildEmote(BaseDiscordClient client, ulong id, out DiscordEmoji emoji)
+        public static bool TryFromGuildEmote(DiscordClient client, ulong id, out DiscordEmoji emoji)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client), "Client cannot be null.");
@@ -301,11 +301,11 @@ namespace DSharpPlus.Entities
         /// skin tone variations (eg. :ok_hand::skin-tone-2:), standard emoticons (eg. :D), as well as guild emoji 
         /// (still specified by :name:).
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="name">Name of the emote to find, including colons (eg. :thinking:).</param>
         /// <param name="includeGuilds">Should guild emojis be included in the search.</param>
         /// <returns>Create <see cref="DiscordEmoji"/> object.</returns>
-        public static DiscordEmoji FromName(BaseDiscordClient client, string name, bool includeGuilds = true)
+        public static DiscordEmoji FromName(DiscordClient client, string name, bool includeGuilds = true)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client), "Client cannot be null.");
@@ -335,11 +335,11 @@ namespace DSharpPlus.Entities
         /// supports skin tone variations (eg. :ok_hand::skin-tone-2:), standard emoticons (eg. :D), as well as guild 
         /// emoji (still specified by :name:).
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="name">Name of the emote to find, including colons (eg. :thinking:).</param>
         /// <param name="emoji">Resulting <see cref="DiscordEmoji"/> object.</param>
         /// <returns>Whether the operation was successful.</returns>
-        public static bool TryFromName(BaseDiscordClient client, string name, out DiscordEmoji emoji)
+        public static bool TryFromName(DiscordClient client, string name, out DiscordEmoji emoji)
             => TryFromName(client, name, true, out emoji);
 
         /// <summary>
@@ -347,12 +347,12 @@ namespace DSharpPlus.Entities
         /// supports skin tone variations (eg. :ok_hand::skin-tone-2:), standard emoticons (eg. :D), as well as guild 
         /// emoji (still specified by :name:).
         /// </summary>
-        /// <param name="client"><see cref="BaseDiscordClient"/> to attach to the object.</param>
+        /// <param name="client"><see cref="DiscordClient"/> to attach to the object.</param>
         /// <param name="name">Name of the emote to find, including colons (eg. :thinking:).</param>
         /// <param name="includeGuilds">Should guild emojis be included in the search.</param>
         /// <param name="emoji">Resulting <see cref="DiscordEmoji"/> object.</param>
         /// <returns>Whether the operation was successful.</returns>
-        public static bool TryFromName(BaseDiscordClient client, string name, bool includeGuilds, out DiscordEmoji emoji)
+        public static bool TryFromName(DiscordClient client, string name, bool includeGuilds, out DiscordEmoji emoji)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client), "Client cannot be null.");

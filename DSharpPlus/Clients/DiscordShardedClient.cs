@@ -51,7 +51,7 @@ namespace DSharpPlus
         /// <summary>
         /// Gets the logger for this client.
         /// </summary>
-        public ILogger<BaseDiscordClient> Logger { get; }
+        public ILogger<DiscordClient> Logger { get; }
 
         /// <summary>
         /// Gets all client shards.
@@ -118,7 +118,7 @@ namespace DSharpPlus
                 this.Configuration.LoggerFactory = new DefaultLoggerFactory();
                 this.Configuration.LoggerFactory.AddProvider(new DefaultLoggerProvider(this.Configuration.MinimumLogLevel, this.Configuration.LogTimestampFormat));
             }
-            this.Logger = this.Configuration.LoggerFactory.CreateLogger<BaseDiscordClient>();
+            this.Logger = this.Configuration.LoggerFactory.CreateLogger<DiscordClient>();
         }
 
         #endregion

@@ -46,7 +46,7 @@ namespace DSharpPlus.Net
     {
         private static Regex RouteArgumentRegex { get; } = new Regex(@":([a-z_]+)");
         private HttpClient HttpClient { get; }
-        private BaseDiscordClient Discord { get; }
+        private DiscordClient Discord { get; }
         private ILogger Logger { get; }
         private ConcurrentDictionary<string, string> RoutesToHashes { get; }
         private ConcurrentDictionary<string, RateLimitBucket> HashesToBuckets { get; }
@@ -60,7 +60,7 @@ namespace DSharpPlus.Net
         private Task _cleanerTask;
         private volatile bool _disposed;
 
-        internal RestClient(BaseDiscordClient client)
+        internal RestClient(DiscordClient client)
             : this(client.Configuration.Proxy, client.Configuration.HttpTimeout, client.Configuration.UseRelativeRatelimit, client.Logger)
         {
             this.Discord = client;
@@ -522,7 +522,7 @@ namespace DSharpPlus.Net
             var resetdelta = resettime - servertime;
             //var difference = clienttime - servertime;
             //if (Math.Abs(difference.TotalSeconds) >= 1)
-            ////    this.Logger.LogMessage(LogLevel.DebugBaseDiscordClient.RestEventId,  $"Difference between machine and server time: {difference.TotalMilliseconds.ToString("#,##0.00", CultureInfo.InvariantCulture)}ms", DateTime.Now);
+            ////    this.Logger.LogMessage(LogLevel.DebugDiscordClient.RestEventId,  $"Difference between machine and server time: {difference.TotalMilliseconds.ToString("#,##0.00", CultureInfo.InvariantCulture)}ms", DateTime.Now);
             //else
             //    difference = TimeSpan.Zero;
 

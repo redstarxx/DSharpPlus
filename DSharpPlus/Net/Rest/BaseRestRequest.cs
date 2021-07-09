@@ -33,7 +33,7 @@ namespace DSharpPlus.Net
     /// </summary>
     public abstract class BaseRestRequest
     {
-        protected internal BaseDiscordClient Discord { get; }
+        protected internal DiscordClient Discord { get; }
         protected internal TaskCompletionSource<RestResponse> RequestTaskSource { get; }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace DSharpPlus.Net
         /// <param name="route">The generic route the request url will use.</param>
         /// <param name="headers">Additional headers for this request.</param>
         /// <param name="ratelimitWaitOverride">Override for ratelimit bucket wait time.</param>
-        internal BaseRestRequest(BaseDiscordClient client, RateLimitBucket bucket, Uri url, RestRequestMethod method, string route, IReadOnlyDictionary<string, string> headers = null, double? ratelimitWaitOverride = null)
+        internal BaseRestRequest(DiscordClient client, RateLimitBucket bucket, Uri url, RestRequestMethod method, string route, IReadOnlyDictionary<string, string> headers = null, double? ratelimitWaitOverride = null)
         {
             this.Discord = client;
             this.RateLimitBucket = bucket;

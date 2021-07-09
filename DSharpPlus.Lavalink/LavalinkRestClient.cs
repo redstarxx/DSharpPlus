@@ -79,7 +79,7 @@ namespace DSharpPlus.Lavalink
             this.ConfigureHttpHandling(password);
         }
 
-        internal LavalinkRestClient(LavalinkConfiguration config, BaseDiscordClient client)
+        internal LavalinkRestClient(LavalinkConfiguration config, DiscordClient client)
         {
             this.RestEndpoint = config.RestEndpoint;
             this._logger = client.Logger;
@@ -351,7 +351,7 @@ namespace DSharpPlus.Lavalink
 
         #endregion
 
-        private void ConfigureHttpHandling(string password, BaseDiscordClient client = null)
+        private void ConfigureHttpHandling(string password, DiscordClient client = null)
         {
             var httphandler = new HttpClientHandler
             {

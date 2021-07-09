@@ -28,14 +28,14 @@ using Microsoft.Extensions.Logging;
 
 namespace DSharpPlus
 {
-    internal class CompositeDefaultLogger : ILogger<BaseDiscordClient>
+    internal class CompositeDefaultLogger : ILogger<DiscordClient>
     {
-        private IEnumerable<ILogger<BaseDiscordClient>> Loggers { get; }
+        private IEnumerable<ILogger<DiscordClient>> Loggers { get; }
 
         public CompositeDefaultLogger(IEnumerable<ILoggerProvider> providers)
         {
-            this.Loggers = providers.Select(x => x.CreateLogger(typeof(BaseDiscordClient).FullName))
-                .OfType<ILogger<BaseDiscordClient>>()
+            this.Loggers = providers.Select(x => x.CreateLogger(typeof(DiscordClient).FullName))
+                .OfType<ILogger<DiscordClient>>()
                 .ToList();
         }
 

@@ -231,7 +231,7 @@ namespace DSharpPlus.Entities
         /// <summary>
         /// Gets the Discord client instance for this asset.
         /// </summary>
-        internal BaseDiscordClient Discord { get; set; }
+        internal DiscordClient Discord { get; set; }
 
         /// <summary>
         /// Gets the asset's name.

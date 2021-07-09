@@ -33,7 +33,7 @@ namespace DSharpPlus
 
         private bool _isDisposed = false;
 
-        internal DefaultLoggerProvider(BaseDiscordClient client)
+        internal DefaultLoggerProvider(DiscordClient client)
             : this(client.Configuration.MinimumLogLevel, client.Configuration.LogTimestampFormat)
         { }
 
@@ -52,8 +52,8 @@ namespace DSharpPlus
             if (this._isDisposed)
                 throw new InvalidOperationException("This logger provider is already disposed.");
 
-            return categoryName != typeof(BaseDiscordClient).FullName && categoryName != typeof(DiscordWebhookClient).FullName
-                ? throw new ArgumentException($"This provider can only provide instances of loggers for {typeof(BaseDiscordClient).FullName} or {typeof(DiscordWebhookClient).FullName}.", nameof(categoryName))
+            return categoryName != typeof(DiscordClient).FullName && categoryName != typeof(DiscordWebhookClient).FullName
+                ? throw new ArgumentException($"This provider can only provide instances of loggers for {typeof(DiscordClient).FullName} or {typeof(DiscordWebhookClient).FullName}.", nameof(categoryName))
                 : new DefaultLogger(this.MinimumLevel, this.TimestampFormat);
         }
 
