@@ -31,6 +31,6 @@ namespace DSharpPlus
 {
     internal interface IRequestClient
     {
-        Task<object> SendAsync(IRequest request);
+        Task<object> SendAsync<T>(IRequest request);
     }
 }

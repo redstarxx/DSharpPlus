@@ -23,14 +23,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace DSharpPlus
 {
-    internal interface IBucket
+    internal struct RestResponse<T>
     {
-        int Maximum { get; }
+        public HttpResponseMessage Message { get; }
 
-        int Remaining { get; }
+        public T Data { get; private set; }
+
+        public RestResponse(HttpResponseMessage message)
+        {
+            this.Message = message;
+            this.Data = default;
+        }
+
+        public void SetEntity(T data)
+            => this.Data = data;
     }
 }

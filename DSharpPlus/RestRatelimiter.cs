@@ -26,6 +26,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace DSharpPlus
 {
@@ -38,15 +39,25 @@ namespace DSharpPlus
         public RestRatelimiter(DiscordConfiguration configuration)
         {
             this.Client = new RestClient(configuration);
+            this.Buckets = new ConcurrentDictionary<object, IBucket>();
         }
 
-        public Task<T> QueueAsync<T>(IRequest request)
+        public async Task<T> QueueAsync<T>(IRequest request)
         {
             var restRequest = (RestRequest)request;
 
             //ratelimit handling here...
 
+            var response = (RestResponse<T>)await this.Client.SendAsync<T>(request);
+            //handle response and update accordingly.
 
+            return response.Data;
+        }
+
+        private RestBucket GetBucket(string route)
+        {
+            var bucket = this.Buckets[route];
+            return (RestBucket)bucket;
         }
     }
 }

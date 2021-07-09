@@ -41,7 +41,7 @@ namespace DSharpPlus
             _http = this.ConfigureClient(configuration);
         }
 
-        public async Task<object> SendAsync(IRequest request)
+        public async Task<object> SendAsync<T>(IRequest request)
         {
             var restRequest = (RestRequest)request;
             var httpRequest = new HttpRequestMessage
@@ -52,12 +52,14 @@ namespace DSharpPlus
             };
 
             var response = await _http.SendAsync(httpRequest);
+            var restResponse = new RestResponse<T>(response);
+
 
             //handle response
 
             //if successful deserialize
 
-            return response; //return as stream
+            return restResponse; //return as rest response
         }
 
         private HttpClient ConfigureClient(DiscordConfiguration configuration)
@@ -88,6 +90,14 @@ namespace DSharpPlus
                 TokenType.Bot => $"Bot {configuration.Token}",
                 _ => throw new ArgumentException("Invalid token type specified.", nameof(configuration.Token)),
             };
+        }
+
+        private void HandleResponse(HttpResponseMessage message)
+        {
+            if(message.IsSuccessStatusCode)
+            {
+
+            }
         }
     }
 }

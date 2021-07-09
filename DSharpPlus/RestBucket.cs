@@ -27,10 +27,10 @@ using System.Text;
 
 namespace DSharpPlus
 {
-    internal interface IBucket
+    internal struct RestBucket : IBucket
     {
-        int Maximum { get; }
+        public int Maximum { get; }
 
-        int Remaining { get; }
+        public int Remaining { get; }
     }
 }
