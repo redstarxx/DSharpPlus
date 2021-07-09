@@ -24,42 +24,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using DSharpPlus.Entities;
 
 namespace DSharpPlus
 {
-    public sealed class DiscordClient
+    public class RestRatelimiter : IRatelimiter
     {
-        private readonly ShardManager _shardManager;
-        private readonly RestManager _restManager;
-        private readonly ICacheManager _cacheManager;
 
-        public DiscordClient(DiscordConfiguration configuration)
-        {
-            _shardManager = new ShardManager(configuration);
-            _restManager = new RestManager(configuration);
-            _cacheManager = configuration.CacheManager ?? CacheManager.CreateDefault();
-        }
-
-        public Task ConnectAsync()
-            => _shardManager.CreateAndInitializeShardsAsync();
-
-        public Task<DiscordGuild> GetGuildAsync(ulong id)
-        {
-
-        }
-            
-    }
-
-    public enum ClientState
-    {
-        Initialized,
-        Connecting,
-        Connected,
-        Identifying,
-        Ready,
-        Disconnected,
-        Reconnecting
     }
 }

@@ -187,7 +187,7 @@ namespace DSharpPlus
         /// </summary>
         public ILoggerFactory LoggerFactory { internal get; set; } = null;
 
-        public ICacheManager CacheManager { internal get; set; }
+        public ICacheManager CacheManager { internal get; set; } = CacheManager
 
         /// <summary>
         /// Creates a new configuration with default values.

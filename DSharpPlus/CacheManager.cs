@@ -29,5 +29,15 @@ namespace DSharpPlus
 {
     public class CacheManager : ICacheManager
     {
+        public static ICacheManager CreateDefault()
+            => new CacheManager();
+
+        public static ICacheManager CreateEmpty()
+            => new CacheManager(true);
+
+        internal CacheManager(bool empty = false)
+        {
+
+        }
     }
 }

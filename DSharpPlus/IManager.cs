@@ -30,5 +30,7 @@ namespace DSharpPlus
     internal interface IManager
     {
         DiscordConfiguration Configuration { get; }
+
+        IRatelimiter Ratelimiter { get; }
     }
 }

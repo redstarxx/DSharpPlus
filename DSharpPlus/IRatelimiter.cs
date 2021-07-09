@@ -23,12 +23,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Text;
 
 namespace DSharpPlus
 {
     internal interface IRatelimiter
     {
-
+        public ConcurrentDictionary<object, IBucket> Buckets { get; }
     }
 }
