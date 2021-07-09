@@ -23,29 +23,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Text;
-using DSharpPlus.Entities;
-using Emzi0767.Utilities;
-using DSharpPlus.EventArgs;
 
 namespace DSharpPlus
 {
-    internal sealed class ShardManager
+    public interface ICacheManager
     {
-        private readonly ICacheManager _cacheManager;
 
-        private readonly AsyncEvent<DiscordClient, ReadyEventArgs> _ready;
-
-        internal event AsyncEventHandler<DiscordClient, ReadyEventArgs> Ready
-        {
-            add => this._ready.Register(value);
-            remove => this._ready.Unregister(value);
-        }
-
-        public ShardManager(DiscordConfiguration configuration)
-        {
-
-        }
     }
 }
