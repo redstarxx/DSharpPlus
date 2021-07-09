@@ -38,20 +38,20 @@ using Newtonsoft.Json.Linq;
 
 namespace DSharpPlus.Net
 {
-    public sealed class DiscordApiClient
+    internal sealed class RestManager
     {
         private const string REASON_HEADER_NAME = "X-Audit-Log-Reason";
 
         internal DiscordClient Discord { get; }
         internal RestClient Rest { get; }
 
-        internal DiscordApiClient(DiscordClient client)
+        internal RestManager(DiscordClient client)
         {
             this.Discord = client;
             this.Rest = new RestClient(client);
         }
 
-        internal DiscordApiClient(IWebProxy proxy, TimeSpan timeout, bool useRelativeRateLimit, ILogger logger) // This is for meta-clients, such as the webhook client
+        internal RestManager(IWebProxy proxy, TimeSpan timeout, bool useRelativeRateLimit, ILogger logger) // This is for meta-clients, such as the webhook client
         {
             this.Rest = new RestClient(proxy, timeout, useRelativeRateLimit, logger);
         }

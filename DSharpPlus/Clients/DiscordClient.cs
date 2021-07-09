@@ -154,7 +154,7 @@ namespace DSharpPlus
             }
             this.Logger = this.Configuration.LoggerFactory.CreateLogger<DiscordClient>();
 
-            this.ApiClient = new DiscordApiClient(this);
+            this.ApiClient = new RestManager(this);
             this.UserCache = new ConcurrentDictionary<ulong, DiscordUser>();
             this.InternalVoiceRegions = new ConcurrentDictionary<string, DiscordVoiceRegion>();
             this._voice_regions_lazy = new Lazy<IReadOnlyDictionary<string, DiscordVoiceRegion>>(() => new ReadOnlyDictionary<string, DiscordVoiceRegion>(this.InternalVoiceRegions));
@@ -992,7 +992,7 @@ namespace DSharpPlus
                 this.MessageCache?.Add(message);
         }
 
-        internal DiscordApiClient ApiClient { get; }
+        internal RestManager ApiClient { get; }
         internal DiscordConfiguration Configuration { get; }
 
         /// <summary>

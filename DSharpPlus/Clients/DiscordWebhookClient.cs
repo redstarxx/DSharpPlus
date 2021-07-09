@@ -60,7 +60,7 @@ namespace DSharpPlus
         public string AvatarUrl { get; set; }
 
         internal List<DiscordWebhook> _hooks;
-        internal DiscordApiClient _apiclient;
+        internal RestManager _apiclient;
 
         internal LogLevel _minimumLogLevel;
         internal string _logTimestampFormat;
@@ -97,7 +97,7 @@ namespace DSharpPlus
 
             var parsedTimeout = timeout ?? TimeSpan.FromSeconds(10);
 
-            this._apiclient = new DiscordApiClient(proxy, parsedTimeout, useRelativeRateLimit, logger);
+            this._apiclient = new RestManager(proxy, parsedTimeout, useRelativeRateLimit, logger);
             this._hooks = new List<DiscordWebhook>();
             this.Webhooks = new ReadOnlyCollection<DiscordWebhook>(this._hooks);
         }
