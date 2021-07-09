@@ -52,52 +52,12 @@ namespace DSharpPlus.Lavalink
         }
 
         /// <summary>
-        /// Creates new Lavalink clients on all shards in a given sharded client.
-        /// </summary>
-        /// <param name="client">Discord sharded client to create Lavalink instances for.</param>
-        /// <returns>A dictionary of created Lavalink clients.</returns>
-        public static async Task<IReadOnlyDictionary<int, LavalinkExtension>> UseLavalinkAsync(this DiscordShardedClient client)
-        {
-            var modules = new Dictionary<int, LavalinkExtension>();
-            await client.InitializeShardsAsync().ConfigureAwait(false);
-
-            foreach (var shard in client.ShardClients.Select(xkvp => xkvp.Value))
-            {
-                var lava = shard.GetExtension<LavalinkExtension>();
-                if (lava == null)
-                    lava = shard.UseLavalink();
-
-                modules[shard.ShardId] = lava;
-            }
-
-            return new ReadOnlyDictionary<int, LavalinkExtension>(modules);
-        }
-
-        /// <summary>
         /// Gets the active instance of the Lavalink client for the DiscordClient.
         /// </summary>
         /// <param name="client">Discord client to get Lavalink instance for.</param>
         /// <returns>Lavalink client instance.</returns>
         public static LavalinkExtension GetLavalink(this DiscordClient client)
             => client.GetExtension<LavalinkExtension>();
-
-        /// <summary>
-        /// Retrieves a <see cref="LavalinkExtension"/> instance for each shard.
-        /// </summary>
-        /// <param name="client">The shard client to retrieve <see cref="LavalinkExtension"/> instances from.</param>
-        /// <returns>A dictionary containing <see cref="LavalinkExtension"/> instances for each shard.</returns>
-        public static async Task<IReadOnlyDictionary<int, LavalinkExtension>> GetLavalinkAsync(this DiscordShardedClient client)
-        {
-            await client.InitializeShardsAsync().ConfigureAwait(false);
-            var extensions = new Dictionary<int, LavalinkExtension>();
-
-            foreach (var shard in client.ShardClients.Values)
-            {
-                extensions.Add(shard.ShardId, shard.GetExtension<LavalinkExtension>());
-            }
-
-            return new ReadOnlyDictionary<int, LavalinkExtension>(extensions);
-        }
 
         /// <summary>
         /// Connects to this voice channel using Lavalink.

@@ -61,54 +61,12 @@ namespace DSharpPlus.CommandsNext
         }
 
         /// <summary>
-        /// Enables CommandsNext module on all shards in this <see cref="DiscordShardedClient"/>.
-        /// </summary>
-        /// <param name="client">Client to enable CommandsNext for.</param>
-        /// <param name="cfg">CommandsNext configuration to use.</param>
-        /// <returns>A dictionary of created <see cref="CommandsNextExtension"/>, indexed by shard id.</returns>
-        public static async Task<IReadOnlyDictionary<int, CommandsNextExtension>> UseCommandsNextAsync(this DiscordShardedClient client, CommandsNextConfiguration cfg)
-        {
-            var modules = new Dictionary<int, CommandsNextExtension>();
-            await client.InitializeShardsAsync().ConfigureAwait(false);
-
-            foreach (var shard in client.ShardClients.Select(xkvp => xkvp.Value))
-            {
-                var cnext = shard.GetExtension<CommandsNextExtension>();
-                if (cnext == null)
-                    cnext = shard.UseCommandsNext(cfg);
-
-                modules[shard.ShardId] = cnext;
-            }
-
-            return new ReadOnlyDictionary<int, CommandsNextExtension>(modules);
-        }
-
-        /// <summary>
         /// Gets the active CommandsNext module for this client.
         /// </summary>
         /// <param name="client">Client to get CommandsNext module from.</param>
         /// <returns>The module, or null if not activated.</returns>
         public static CommandsNextExtension GetCommandsNext(this DiscordClient client)
             => client.GetExtension<CommandsNextExtension>();
-
-
-        /// <summary>
-        /// Gets the active CommandsNext modules for all shards in this client.
-        /// </summary>
-        /// <param name="client">Client to get CommandsNext instances from.</param>
-        /// <returns>A dictionary of the modules, indexed by shard id.</returns>
-        public static async Task<IReadOnlyDictionary<int, CommandsNextExtension>> GetCommandsNextAsync(this DiscordShardedClient client)
-        {
-            await client.InitializeShardsAsync().ConfigureAwait(false);
-            var extensions = new Dictionary<int, CommandsNextExtension>();
-
-            foreach (var shard in client.ShardClients.Select(xkvp => xkvp.Value))
-            {
-                extensions.Add(shard.ShardId, shard.GetExtension<CommandsNextExtension>());
-            }
-
-            return new ReadOnlyDictionary<int, CommandsNextExtension>(extensions);
-        }
 
         /// <summary>
         /// Registers all commands from a given assembly. The command classes need to be public to be considered for registration.

@@ -57,53 +57,12 @@ namespace DSharpPlus.VoiceNext
         }
 
         /// <summary>
-        /// Creates new VoiceNext clients on all shards in a given sharded client.
-        /// </summary>
-        /// <param name="client">Discord sharded client to create VoiceNext instances for.</param>
-        /// <param name="config">Configuration for the VoiceNext clients.</param>
-        /// <returns>A dictionary of created VoiceNext clients.</returns>
-        public static async Task<IReadOnlyDictionary<int, VoiceNextExtension>> UseVoiceNextAsync(this DiscordShardedClient client, VoiceNextConfiguration config)
-        {
-            var modules = new Dictionary<int, VoiceNextExtension>();
-            await client.InitializeShardsAsync().ConfigureAwait(false);
-
-            foreach (var shard in client.ShardClients.Select(xkvp => xkvp.Value))
-            {
-                var vnext = shard.GetExtension<VoiceNextExtension>();
-                if (vnext == null)
-                    vnext = shard.UseVoiceNext(config);
-
-                modules[shard.ShardId] = vnext;
-            }
-
-            return new ReadOnlyDictionary<int, VoiceNextExtension>(modules);
-        }
-
-        /// <summary>
         /// Gets the active instance of VoiceNext client for the DiscordClient.
         /// </summary>
         /// <param name="client">Discord client to get VoiceNext instance for.</param>
         /// <returns>VoiceNext client instance.</returns>
         public static VoiceNextExtension GetVoiceNext(this DiscordClient client)
             => client.GetExtension<VoiceNextExtension>();
-
-        /// <summary>
-        /// Retrieves a <see cref="VoiceNextExtension"/> instance for each shard.
-        /// </summary>
-        /// <param name="client">The shard client to retrieve <see cref="VoiceNextExtension"/> instances from.</param>
-        /// <returns>A dictionary containing <see cref="VoiceNextExtension"/> instances for each shard.</returns>
-        public static async Task<IReadOnlyDictionary<int, VoiceNextExtension>> GetVoiceNextAsync(this DiscordShardedClient client)
-        {
-            await client.InitializeShardsAsync().ConfigureAwait(false);
-            var extensions = new Dictionary<int, VoiceNextExtension>();
-
-            foreach (var shard in client.ShardClients.Values)
-            {
-                extensions.Add(shard.ShardId, shard.GetExtension<VoiceNextExtension>());
-            }
-
-            return new ReadOnlyDictionary<int, VoiceNextExtension>(extensions);
-        }
 
         /// <summary>
         /// Connects to this voice channel using VoiceNext.
