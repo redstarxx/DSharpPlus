@@ -16,6 +16,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cache\**" />
+    <Compile Remove="Gateway\**" />
+    <Compile Remove="Rest\**" />
+    <EmbeddedResource Remove="Cache\**" />
+    <EmbeddedResource Remove="Gateway\**" />
+    <EmbeddedResource Remove="Rest\**" />
+    <None Remove="Cache\**" />
+    <None Remove="Gateway\**" />
+    <None Remove="Rest\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
@@ -27,12 +39,6 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Emzi0767.Common" Version="2.6.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Gateway\" />
-    <Folder Include="Cache\" />
-    <Folder Include="Rest\" />
   </ItemGroup>
 
 </Project>
