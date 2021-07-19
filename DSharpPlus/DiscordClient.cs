@@ -33,7 +33,6 @@ namespace DSharpPlus
     {
         private readonly ShardManager _shardManager;
         private readonly RestManager _restManager;
-        private readonly ICacheManager _cacheManager;
 
         public IReadOnlyDictionary<ulong, DiscordGuild> Guilds
             => _cacheManager.GuildCache;

@@ -29,6 +29,8 @@ namespace DSharpPlus
 {
     internal class ShardManager
     {
+        private readonly ICacheManager _cacheManager;
+
         public ShardManager(DiscordConfiguration configuration)
         {
 
