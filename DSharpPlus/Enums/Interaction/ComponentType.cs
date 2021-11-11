@@ -20,24 +20,23 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-namespace DSharpPlus
+namespace DSharpPlus;
+
+/// <summary>
+/// Represents a type of component.
+/// </summary>
+public enum ComponentType
 {
     /// <summary>
-    /// Represents a type of component.
+    /// A row of components.
     /// </summary>
-    public enum ComponentType
-    {
-        /// <summary>
-        /// A row of components.
-        /// </summary>
-        ActionRow = 1,
-        /// <summary>
-        /// A button.
-        /// </summary>
-        Button = 2,
-        /// <summary>
-        /// A select menu.
-        /// </summary>
-        Select = 3
-    }
+    ActionRow = 1,
+    /// <summary>
+    /// A button.
+    /// </summary>
+    Button = 2,
+    /// <summary>
+    /// A select menu.
+    /// </summary>
+    Select = 3
 }

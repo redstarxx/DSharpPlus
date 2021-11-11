@@ -21,12 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace DSharpPlus.CommandsNext
+namespace DSharpPlus.CommandsNext;
+
+/// <summary>
+/// Represents arguments for <see cref="CommandsNextExtension.CommandExecuted"/> event.
+/// </summary>
+public class CommandExecutionEventArgs : CommandEventArgs
 {
-    /// <summary>
-    /// Represents arguments for <see cref="CommandsNextExtension.CommandExecuted"/> event.
-    /// </summary>
-    public class CommandExecutionEventArgs : CommandEventArgs
-    {
-    }
 }

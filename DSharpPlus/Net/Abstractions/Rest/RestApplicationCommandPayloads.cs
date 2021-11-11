@@ -25,74 +25,73 @@ using System.Collections.Generic;
 using DSharpPlus.Entities;
 using Newtonsoft.Json;
 
-namespace DSharpPlus.Net.Abstractions
+namespace DSharpPlus.Net.Abstractions;
+
+internal class RestApplicationCommandCreatePayload
 {
-    internal class RestApplicationCommandCreatePayload
-    {
-        [JsonProperty("type")]
-        public ApplicationCommandType Type { get; set; }
+    [JsonProperty("type")]
+    public ApplicationCommandType Type { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+    [JsonProperty("name")]
+    public string Name { get; set; }
 
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
-        public string Description { get; set; }
+    [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+    public string Description { get; set; }
 
-        [JsonProperty("options", NullValueHandling = NullValueHandling.Ignore)]
-        public IEnumerable<DiscordApplicationCommandOption> Options { get; set; }
+    [JsonProperty("options", NullValueHandling = NullValueHandling.Ignore)]
+    public IEnumerable<DiscordApplicationCommandOption> Options { get; set; }
 
-        [JsonProperty("default_permission", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? DefaultPermission { get; set; }
-    }
+    [JsonProperty("default_permission", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? DefaultPermission { get; set; }
+}
 
-    internal class RestApplicationCommandEditPayload
-    {
-        [JsonProperty("name")]
-        public Optional<string> Name { get; set; }
+internal class RestApplicationCommandEditPayload
+{
+    [JsonProperty("name")]
+    public Optional<string> Name { get; set; }
 
-        [JsonProperty("description")]
-        public Optional<string> Description { get; set; }
+    [JsonProperty("description")]
+    public Optional<string> Description { get; set; }
 
-        [JsonProperty("options")]
-        public Optional<IReadOnlyCollection<DiscordApplicationCommandOption>> Options { get; set; }
+    [JsonProperty("options")]
+    public Optional<IReadOnlyCollection<DiscordApplicationCommandOption>> Options { get; set; }
 
-        [JsonProperty("default_permission", NullValueHandling = NullValueHandling.Ignore)]
-        public Optional<bool?> DefaultPermission { get; set; }
-    }
+    [JsonProperty("default_permission", NullValueHandling = NullValueHandling.Ignore)]
+    public Optional<bool?> DefaultPermission { get; set; }
+}
 
-    internal class RestInteractionResponsePayload
-    {
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
-        public InteractionResponseType Type { get; set; }
+internal class RestInteractionResponsePayload
+{
+    [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+    public InteractionResponseType Type { get; set; }
 
-        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
-        public DiscordInteractionApplicationCommandCallbackData Data { get; set; }
-    }
+    [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+    public DiscordInteractionApplicationCommandCallbackData Data { get; set; }
+}
 
-    internal class RestFollowupMessageCreatePayload
-    {
-        [JsonProperty("content", NullValueHandling = NullValueHandling.Ignore)]
-        public string Content { get; set; }
+internal class RestFollowupMessageCreatePayload
+{
+    [JsonProperty("content", NullValueHandling = NullValueHandling.Ignore)]
+    public string Content { get; set; }
 
-        [JsonProperty("tts", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? IsTTS { get; set; }
+    [JsonProperty("tts", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? IsTTS { get; set; }
 
-        [JsonProperty("embeds", NullValueHandling = NullValueHandling.Ignore)]
-        public IEnumerable<DiscordEmbed> Embeds { get; set; }
+    [JsonProperty("embeds", NullValueHandling = NullValueHandling.Ignore)]
+    public IEnumerable<DiscordEmbed> Embeds { get; set; }
 
-        [JsonProperty("allowed_mentions", NullValueHandling = NullValueHandling.Ignore)]
-        public DiscordMentions Mentions { get; set; }
+    [JsonProperty("allowed_mentions", NullValueHandling = NullValueHandling.Ignore)]
+    public DiscordMentions Mentions { get; set; }
 
-        [JsonProperty("flags", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Flags { get; set; }
+    [JsonProperty("flags", NullValueHandling = NullValueHandling.Ignore)]
+    public int? Flags { get; set; }
 
-        [JsonProperty("components", NullValueHandling = NullValueHandling.Ignore)]
-        public IReadOnlyCollection<DiscordActionRowComponent> Components { get; set; }
-    }
+    [JsonProperty("components", NullValueHandling = NullValueHandling.Ignore)]
+    public IReadOnlyCollection<DiscordActionRowComponent> Components { get; set; }
+}
 
-    internal class RestEditApplicationCommmandPermissionsPayload
-    {
-        [JsonProperty("permissions")]
-        public IEnumerable<DiscordApplicationCommandPermission> Permissions { get; set; }
-    }
+internal class RestEditApplicationCommmandPermissionsPayload
+{
+    [JsonProperty("permissions")]
+    public IEnumerable<DiscordApplicationCommandPermission> Permissions { get; set; }
 }

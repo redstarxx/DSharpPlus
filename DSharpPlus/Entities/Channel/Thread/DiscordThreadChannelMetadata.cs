@@ -33,39 +33,38 @@ using DSharpPlus.Net.Abstractions;
 using DSharpPlus.Net.Models;
 using Newtonsoft.Json;
 
-namespace DSharpPlus.Entities
+namespace DSharpPlus.Entities;
+
+public class DiscordThreadChannelMetadata
 {
-    public class DiscordThreadChannelMetadata
-    {
-        /// <summary>
-        /// Gets whether this thread is archived or not.
-        /// </summary>
-        [JsonProperty("archived", NullValueHandling = NullValueHandling.Ignore)]
-        public bool IsArchived { get; internal set; }
+    /// <summary>
+    /// Gets whether this thread is archived or not.
+    /// </summary>
+    [JsonProperty("archived", NullValueHandling = NullValueHandling.Ignore)]
+    public bool IsArchived { get; internal set; }
 
-        /// <summary>
-        /// Gets the duration in minutes to automatically archive the thread after recent activity. Can be set to: 60, 1440, 4320, 10080.
-        /// </summary>
-        [JsonProperty("auto_archive_duration", NullValueHandling = NullValueHandling.Ignore)]
-        public AutoArchiveDuration AutoArchiveDuration { get; internal set; }
+    /// <summary>
+    /// Gets the duration in minutes to automatically archive the thread after recent activity. Can be set to: 60, 1440, 4320, 10080.
+    /// </summary>
+    [JsonProperty("auto_archive_duration", NullValueHandling = NullValueHandling.Ignore)]
+    public AutoArchiveDuration AutoArchiveDuration { get; internal set; }
 
-        /// <summary>
-        /// Gets the time timestamp for when the thread's archive status was last changed.
-        /// </summary>
-        [JsonIgnore]
-        public DateTimeOffset? ArchiveTimestamp
-            => !string.IsNullOrWhiteSpace(this.ArchiveTimestampRaw) && DateTimeOffset.TryParse(this.ArchiveTimestampRaw, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dto) ?
-                dto : null;
+    /// <summary>
+    /// Gets the time timestamp for when the thread's archive status was last changed.
+    /// </summary>
+    [JsonIgnore]
+    public DateTimeOffset? ArchiveTimestamp
+        => !string.IsNullOrWhiteSpace(this.ArchiveTimestampRaw) && DateTimeOffset.TryParse(this.ArchiveTimestampRaw, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dto) ?
+            dto : null;
 
-        [JsonProperty("archive_timestamp", NullValueHandling = NullValueHandling.Ignore)]
-        internal string ArchiveTimestampRaw { get; set; }
+    [JsonProperty("archive_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+    internal string ArchiveTimestampRaw { get; set; }
 
-        /// <summary>
-        /// Gets whether this thread is locked or not.
-        /// </summary>
-        [JsonProperty("locked", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? IsLocked { get; internal set; }
+    /// <summary>
+    /// Gets whether this thread is locked or not.
+    /// </summary>
+    [JsonProperty("locked", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? IsLocked { get; internal set; }
 
-        internal DiscordThreadChannelMetadata() { }
-    }
+    internal DiscordThreadChannelMetadata() { }
 }

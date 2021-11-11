@@ -3,7 +3,7 @@
   <PropertyGroup>
     <VersionPrefix>4.2.0</VersionPrefix>
     <NoWarn>1591</NoWarn>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <Optimize>True</Optimize>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DebugType>Portable</DebugType>

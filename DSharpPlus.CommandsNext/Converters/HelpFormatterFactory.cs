@@ -23,16 +23,15 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DSharpPlus.CommandsNext.Converters
+namespace DSharpPlus.CommandsNext.Converters;
+
+internal class HelpFormatterFactory
 {
-    internal class HelpFormatterFactory
-    {
-        private ObjectFactory Factory { get; set; }
+    private ObjectFactory Factory { get; set; }
 
-        public HelpFormatterFactory() { }
+    public HelpFormatterFactory() { }
 
-        public void SetFormatterType<T>() where T : BaseHelpFormatter => this.Factory = ActivatorUtilities.CreateFactory(typeof(T), new[] { typeof(CommandContext) });
+    public void SetFormatterType<T>() where T : BaseHelpFormatter => this.Factory = ActivatorUtilities.CreateFactory(typeof(T), new[] { typeof(CommandContext) });
 
-        public BaseHelpFormatter Create(CommandContext ctx) => this.Factory(ctx.Services, new object[] { ctx }) as BaseHelpFormatter;
-    }
+    public BaseHelpFormatter Create(CommandContext ctx) => this.Factory(ctx.Services, new object[] { ctx }) as BaseHelpFormatter;
 }
